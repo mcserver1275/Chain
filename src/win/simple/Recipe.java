@@ -50,7 +50,7 @@ public class Recipe {
 		TwoBook.setIngredient('S', Material.BOOK);
 		Bukkit.getServer().addRecipe(TwoBook);
 		
-		ShapedRecipe OnePickaxe = new ShapedRecipe(Main.addItem(null, "1", 0, false));
+		ShapedRecipe OnePickaxe = new ShapedRecipe(Main.addItem(null, "1", 0, false, true));
 		OnePickaxe.shape(new String[]{
 			"   ",
 			" S ",
@@ -60,7 +60,7 @@ public class Recipe {
 		OnePickaxe.setIngredient('G', Material.DIAMOND_PICKAXE);
 		Bukkit.getServer().addRecipe(OnePickaxe);
 		
-		ShapedRecipe TwoPickaxe = new ShapedRecipe(Main.addItem(null, "2", 0, false));
+		ShapedRecipe TwoPickaxe = new ShapedRecipe(Main.addItem(null, "2", 0, false, true));
 		TwoPickaxe.shape(new String[]{
 			"   ",
 			" B ",

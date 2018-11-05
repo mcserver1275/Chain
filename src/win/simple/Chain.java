@@ -5,7 +5,6 @@ import net.minecraft.server.v1_13_R2.WorldServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_13_R2.block.CraftBlock;
 import org.bukkit.entity.Player;
@@ -23,7 +22,6 @@ public class Chain {
 	private World world = null;
 	private int DestructionNumber = 0;
 	private Player player = null;
-
 
 	public Chain(World world, Location OldLocation, org.bukkit.Material PlayerDestructionType, String BlockIdentification, int DestructionNumber, Player player) {
 		this.OldLocation = OldLocation;
@@ -46,35 +44,34 @@ public class Chain {
 
 	public void Start() {
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("Chain"), new Runnable() {
-		@Override
-		public void run() {
-			Location NewLoc = null;
+			@Override
+			public void run() {
+				Location NewLoc = null;
 
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setX(OldLocation.getX() + 1);
-			setBlock(NewLoc);
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setX(OldLocation.getX() + 1);
+				setBlock(NewLoc);
 				
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setX(OldLocation.getX() - 1);
-			setBlock(NewLoc);
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setX(OldLocation.getX() - 1);
+				setBlock(NewLoc);
 				
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setY(OldLocation.getY() + 1);
-			setBlock(NewLoc);
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setY(OldLocation.getY() + 1);
+				setBlock(NewLoc);
 				
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setY(OldLocation.getY() - 1);
-			setBlock(NewLoc);
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setY(OldLocation.getY() - 1);
+				setBlock(NewLoc);
 				
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setZ(OldLocation.getZ() + 1);
-			setBlock(NewLoc);
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setZ(OldLocation.getZ() + 1);
+				setBlock(NewLoc);
 				
-			NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
-			NewLoc.setZ(OldLocation.getZ() - 1);
-			setBlock(NewLoc);
-		}
-			
+				NewLoc = new Location(world, OldLocation.getBlockX(), OldLocation.getBlockY(), OldLocation.getBlockZ());
+				NewLoc.setZ(OldLocation.getZ() - 1);
+				setBlock(NewLoc);
+			}
 		});
 	}
 
@@ -84,7 +81,16 @@ public class Chain {
 				if(Blockmess.get(this.BlockIdentification) < this.DestructionNumber) {
 					ItemStack MainItem = this.player.getInventory().getItemInMainHand();
 
-					MainItem.setDurability((short) (MainItem.getDurability() + 1));
+					boolean naijiu = true;
+					for(String lore : MainItem.getItemMeta().getLore()) {
+						if(lore.equals("§e无限耐久")) {
+							naijiu = false;
+							break;
+						}
+					}
+					if(naijiu) {
+						MainItem.setDurability((short) (MainItem.getDurability() + 1));
+					}
 					if(MainItem.getDurability() <= 1561) {
 						if(MainItem.getDurability() != -1) {
 							WorldServer ws = ((CraftBlock) NewLoc.getBlock()).getCraftWorld().getHandle();
